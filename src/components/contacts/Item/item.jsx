@@ -3,14 +3,15 @@ import { AiFillDelete } from 'react-icons/ai';
 import { FcBusinessContact } from 'react-icons/fc';
 import { BsTelephoneOutbound } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from "redux/action";
+import { deleteContact } from "redux/operations";
 
-const ItemContact = ({contact,number,id}) => {
+const ItemContact = ({name,phone,id}) => {
 
   const dispatch = useDispatch();
 
-  const handleContactDelete = contactId => {
-    dispatch(deleteContact(contactId));
+  const handleContactDelete = id => {
+
+    dispatch(deleteContact(id));
   };
 
  return (
@@ -18,11 +19,11 @@ const ItemContact = ({contact,number,id}) => {
     <>
 <Wrapper>
   <FcBusinessContact size={20} />
-  <Contact> {contact}</Contact>
+  <Contact>{name}</Contact>
 </Wrapper>
 <Wrapper>
   <BsTelephoneOutbound size={20} />
-  <Tel>{number}</Tel>
+  <Tel>{phone}</Tel>
 </Wrapper>
 <Delete role="button" aria-label="Delete" onClick={() => handleContactDelete(id)}>
   <AiFillDelete size={20} />
