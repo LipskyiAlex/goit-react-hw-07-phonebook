@@ -10,9 +10,9 @@ const contactsInitialState = {
 const handlePending = state => {
   state.isLoading = true;
 };
-const handleRejected = (state, action) => {
+const handleRejected = (state, {payload}) => {
   state.isLoading = false;
-  state.error = action.payload;
+  state.error = payload;
 };
 
 const contactsSlice = createSlice({
@@ -27,47 +27,26 @@ const contactsSlice = createSlice({
     [addContact.rejected]: handleRejected,
     [deleteContact.rejected]: handleRejected,
 
-    [fetchContacts.fulfilled](state, action) {
+    [fetchContacts.fulfilled](state, {payload}) {
       state.isLoading = false;
       state.error = null;
-      state.items = action.payload;
+      state.items = payload;
     },
-    [addContact.fulfilled](state, action) {
+    [addContact.fulfilled](state, {payload}) {
       state.isLoading = false;
       state.error = null;
-      state.items.push(action.payload);
+      state.items.push(payload);
     },
-    [deleteContact.fulfilled](state,action) {
+    [deleteContact.fulfilled](state,{payload}) {
 
       state.isLoading = false;
       state.error = null;
-      const index = state.items.findIndex(contact => contact.id === action.payload.id);
+      const index = state.items.findIndex(contact => contact.id === payload.id);
 
       state.items.splice(index,1);
     }
 
-    // addContact: {
-    //   reducer(state,action) {
 
-    //     state.items.push(action.payload);
-    //   },
-
-    //   prepare(values) {
-
-    //     return {
-    //       payload: {
-    //         id: nanoid(),
-    //         contact: values.name,
-    //         number: values.number,
-    //       },
-    //     };
-    //   },
-    // },
-
-    // deleteContact(state, action) {
-
-    //   state.items = state.items.filter(({id}) => id !== action.payload);
-    // },
   },
 });
 
