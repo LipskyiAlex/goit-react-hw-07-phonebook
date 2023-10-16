@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import {Input,Wrapper,Title} from './filter.styled';
 import { selectFilter } from "redux/selectors";
 import { useDispatch } from 'react-redux';
-import {setFilter} from 'redux/action';
+import { setFilter } from "redux/filterSlice";
 
 
 const Filter = () => {
